@@ -1,0 +1,80 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "bwa-mem",
+            "preLaunchTask": "Build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/fastbwa",
+            "args": [
+                "mem",
+                "-t",
+                "1",
+                "-M",
+                "-R",
+                "'@RG\\tID:normal\\tSM:normal\\tPL:illumina\\tLB:normal\\tPG:bwa'",
+                "~/data1/fmt_ref/human_g1k_v37_decoy.fasta",
+                "~/data/fastq/dataset/na12878_wes_144/1w_1.fq",
+                "~/data/fastq/dataset/na12878_wes_144/1w_2.fq",
+                "-o",
+                "/dev/null",
+                "-Z"
+            ],
+            "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
+        },
+        {
+            "name": "index",
+            "preLaunchTask": "Build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/fastbwa",
+            "args": [
+                "index",
+                "~/data/reference/human_g1k_v37_decoy.fasta"
+            ],
+            "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
+        },
+        {
+            "name": "buildkmer",
+            "preLaunchTask": "Build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/fastbwa",
+            "args": [
+                "buildkmer",
+                "~/data/reference/human_g1k_v37_decoy.fasta.256.64.fmt",
+                "~/data/reference/human_g1k_v37_decoy.fasta.kmer"
+            ],
+            "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
+        },
+        {
+            "name": "share mem",
+            "preLaunchTask": "Build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/fastbwa",
+            "args": [
+                "shm",
+                "-Z",
+                "~/data1/fmt_ref/human_g1k_v37_decoy.fasta"
+            ],
+            "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
+        },
+        {
+            "name": "pac to bref",
+            "preLaunchTask": "Build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/fastbwa",
+            "args": [
+                "pac2bref",
+                "~/data1/fmt_ref/human_g1k_v37_decoy.fasta"
+            ],
+            "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
+        }
+    ]
+}
