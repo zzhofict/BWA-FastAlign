@@ -386,16 +386,6 @@ int main_shm(int argc, char *argv[])
 		if (bwa_shm_test(shm_prefix) == 0)
 		{
 #if 0
-			bwaidx_t *idx;
-			if (useERT)
-				idx = bwa_ertidx_load_from_disk(argv[optind]);
-			else
-				idx = bwa_idx_load_from_disk(argv[optind], BWA_IDX_BNS | BWA_IDX_PAC | BWA_IDX_FMT);
-			if (bwa_shm_stage(idx, shm_prefix, useERT) < 0) {
-				fprintf(stderr, "[E::%s] failed to stage the index in shared memory\n", __func__);
-				ret = 1;
-			}
-			bwa_idx_destroy(idx);
 #else
 
 			if (bwa_shm_stage_fmt(argv[optind]) < 0) {

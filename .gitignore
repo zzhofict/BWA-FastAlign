@@ -1,6 +1,6 @@
 # Prerequisites
 *.d
-fastbwa
+fastalign
 
 # Object files
 *.o

@@ -103,8 +103,6 @@ extern "C" {
 	bwaidx_t *bwa_idx_load_from_shm(const char *hint);
 	bwaidx_t *bwa_idx_load_from_disk(const char *hint, int which);
 	bwaidx_t *bwa_fmtidx_load_from_shm(const char *hint);
-	bwaidx_t *bwa_ertidx_load_from_shm(const char *hint);
-	bwaidx_t *bwa_ertidx_load_from_disk(const char *hint);
 	bwaidx_t *bwa_idx_load(const char *hint, int which);
 	void bwa_idx_destroy(bwaidx_t *idx);
 	int bwa_idx2mem(bwaidx_t *idx);

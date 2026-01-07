@@ -9,7 +9,7 @@
             "preLaunchTask": "Build",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/fastbwa",
+            "program": "${workspaceRoot}/fastalign",
             "args": [
                 "mem",
                 "-t",
@@ -31,10 +31,10 @@
             "preLaunchTask": "Build",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/fastbwa",
+            "program": "${workspaceRoot}/fastalign",
             "args": [
                 "index",
-                "~/data/reference/human_g1k_v37_decoy.fasta"
+                "./index/ref.fasta"
             ],
             "cwd": "${workspaceFolder}", // 当前工作路径：当前文件所在的工作空间
         },
@@ -43,7 +43,7 @@
             "preLaunchTask": "Build",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/fastbwa",
+            "program": "${workspaceRoot}/fastalign",
             "args": [
                 "buildkmer",
                 "~/data/reference/human_g1k_v37_decoy.fasta.256.64.fmt",
@@ -56,7 +56,7 @@
             "preLaunchTask": "Build",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/fastbwa",
+            "program": "${workspaceRoot}/fastalign",
             "args": [
                 "shm",
                 "-Z",
@@ -69,7 +69,7 @@
             "preLaunchTask": "Build",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/fastbwa",
+            "program": "${workspaceRoot}/fastalign",
             "args": [
                 "pac2bref",
                 "~/data1/fmt_ref/human_g1k_v37_decoy.fasta"

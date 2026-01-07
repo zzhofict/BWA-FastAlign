@@ -375,11 +375,13 @@ int bwa_idx_build(const char *fa, const char *prefix, int algo_type, int block_s
 
 	{ // nucleotide indexing
 		gzFile fp = xzopen(fa, "r");
-		t = clock();
+        start_async_read(fp);
+        t = clock();
 		if (bwa_verbose >= 3) fprintf(stderr, "[bwa_index] Pack FASTA... ");
 		l_pac = bns_fasta2bntseq(fp, prefix, 0);
 		if (bwa_verbose >= 3) fprintf(stderr, "%.2f sec\n", (float)(clock() - t) / CLOCKS_PER_SEC);
-		err_gzclose(fp);
+        stop_async_read(fp);
+        err_gzclose(fp);
 	}
 	if (algo_type == 0) algo_type = l_pac > 50000000? 2 : 3; // set the algorithm for generating BWT
 	{
@@ -409,11 +411,13 @@ int bwa_idx_build(const char *fa, const char *prefix, int algo_type, int block_s
 	}
 	{
 		gzFile fp = xzopen(fa, "r");
-		t = clock();
+        start_async_read(fp);
+        t = clock();
 		if (bwa_verbose >= 3) fprintf(stderr, "[bwa_index] Pack forward-only FASTA... ");
 		l_pac = bns_fasta2bntseq(fp, prefix, 1);
 		if (bwa_verbose >= 3) fprintf(stderr, "%.2f sec\n", (float)(clock() - t) / CLOCKS_PER_SEC);
-		err_gzclose(fp);
+        stop_async_read(fp);
+        err_gzclose(fp);
 	}
 	{
 		bwt_t *bwt;

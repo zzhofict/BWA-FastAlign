@@ -602,16 +602,9 @@ int main_mem(int argc, char *argv[])
 	PROF_END(gprof[G_PREPARE], prepare);
 
 	PROF_START(idx);
-	if (useERT) aux.idx = bwa_ertidx_load_from_shm(argv[optind]);
-	else aux.idx = bwa_fmtidx_load_from_shm(argv[optind]);
+	aux.idx = bwa_fmtidx_load_from_shm(argv[optind]);
 	if (aux.idx == 0) {
-		if (!useERT) {
-			if ((aux.idx = bwa_idx_load(argv[optind], BWA_IDX_BNS | BWA_IDX_PAC | BWA_IDX_FMT)) == 0) return 1; // FIXME: memory leak
-		}
-		else {
-			if ((aux.idx = bwa_ertidx_load_from_disk(argv[optind])) == 0) return 1; // FIXME: memory leak
-		}
-
+		if ((aux.idx = bwa_idx_load(argv[optind], BWA_IDX_BNS | BWA_IDX_PAC | BWA_IDX_FMT)) == 0) return 1; // FIXME: memory leak
 	} else if (bwa_verbose >= 3)
 		fprintf(stderr, "[M::%s] load the bwa index from shared memory\n", __func__);
 	if (ignore_alt)
