@@ -184,19 +184,13 @@ static inline void *write_data(ktp_aux_t *aux, ktp_data_t *data)
 				buf_written = 0;
 			}
 		}
+		// release sams mem space
+        _destory_clear_kstring(data->sams[i].sam);
 	}
 	if (buf_written > 0) {
 		err_fwrite(aux->wbuf, 1, buf_written, stdout);
 	}
 
-	//for (i = 0; i < data->n_sams; ++i)
-	//{
-	//	//ms += data->sams[i].sam.m;
-	//	if (data->sams[i].sam.l)
-	//		err_fputs(data->sams[i].sam.s, stdout);
-	//}
-
-	//fprintf(stderr, "sam size: %ld M\n", ms / 1024 / 1024);
 	PROF_END(gprof[G_WRITE], write);
 	return 0;
 }
@@ -374,7 +368,7 @@ int main_mem(int argc, char *argv[])
 	PROF_START(all);
 	PROF_START(prepare);
 	mem_opt_t *opt, opt0;
-	int fd, fd2, i, c, ignore_alt = 0, no_mt_io = 0;
+	int fd, fd2, i, c, ignore_alt = 0, no_mt_io = 2;
 	int fixed_chunk_size = -1;
 	gzFile fp, fp2 = 0;
 	char *p, *rg_line = 0, *hdr_line = 0;
@@ -391,6 +385,7 @@ int main_mem(int argc, char *argv[])
 	aux.opt = opt = mem_opt_init();
 	memset(&opt0, 0, sizeof(mem_opt_t));
 	while ((c = getopt(argc, argv, "512qpaMCSPVYjuk:c:v:s:r:t:b:R:A:B:O:E:U:w:L:d:T:Q:D:m:I:N:o:f:W:x:G:h:y:K:X:H:F:z:Z")) >= 0) {
+	//while ((c = getopt(argc, argv, "51qpaMCSPVYjuk:c:v:s:r:t:b:R:A:B:O:E:U:w:L:d:T:Q:D:m:I:N:o:f:W:x:G:h:y:K:X:H:F:z:Z")) >= 0) {
 		if (c == 'k') opt->min_seed_len = atoi(optarg), opt0.min_seed_len = 1;
 		else if (c == '1') no_mt_io = 1;
 		else if (c == '2') no_mt_io = 2;

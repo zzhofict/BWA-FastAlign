@@ -33,6 +33,7 @@ int64_t gdat[LIM_GLOBAL_DATA_TYPE] = {0};
 
 int find_opt(uint64_t *a, int len, double *max, double *min, double *avg)
 {
+#ifdef SHOW_PERF
     int i = 0;
     uint64_t umax = 0, umin = UINT64_MAX, uavg = 0;
     for (i = 0; i < len; i++)
@@ -44,6 +45,7 @@ int find_opt(uint64_t *a, int len, double *max, double *min, double *avg)
     *avg = uavg * 1.0 / len / proc_freq;
     *max = umax * 1.0 / proc_freq;
     *min = umin * 1.0 / proc_freq;
+#endif
     return 1;
 }
 

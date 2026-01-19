@@ -969,7 +969,7 @@ void mem_aln2sam(const mem_opt_t *opt, const bntseq_t *bns, kstring_t *str, bseq
 		kputsn("\tMD:Z:", 6, str); kputs((char*)(p->cigar + p->n_cigar), str);
 	}
 	if (m && m->n_cigar) { kputsn("\tMC:Z:", 6, str); add_cigar(opt, m, str, which); }
-//	if (m) { kputsn("\tMQ:i:", 6, str); kputw(m->mapq, str);}
+	if (m) { kputsn("\tMQ:i:", 6, str); kputw(m->mapq, str);}
 	if (p->score >= 0) { kputsn("\tAS:i:", 6, str); kputw(p->score, str); }
 	if (p->sub >= 0) { kputsn("\tXS:i:", 6, str); kputw(p->sub, str); }
 	if (bwa_rg_id[0]) { kputsn("\tRG:Z:", 6, str); kputs(bwa_rg_id, str); }
@@ -1289,6 +1289,10 @@ mem_worker_t *init_mem_worker(const mem_opt_t *opt, const FMTIndex *fmt, const E
 	return w;
 }
 
+static inline void clear_seeds() {
+
+}
+
 static void mem_collect_intv_batch(const mem_opt_t *opt, const FMTIndex *fmt, int len, const uint8_t *seq, smem_v *smem, smem_aux_t *a, int tid)
 {
 	int i, k, x = 0, old_n;
@@ -1296,7 +1300,8 @@ static void mem_collect_intv_batch(const mem_opt_t *opt, const FMTIndex *fmt, in
 	int split_len = (int)(opt->min_seed_len * opt->split_factor + .499);
 	int max_seed_len = 0;
 	int start_N_num = 0, start_flag = 1;
-	smem->mem.n = 0;
+	// smem->mem.n = 0;
+	_destory_clear_vec(smem->mem);
 	// 1. first pass: find all SMEMs
 	// goto third_seed;
 	PROF_START(seed_1);
@@ -1373,7 +1378,8 @@ void find_smem(const mem_opt_t *opt, const FMTIndex *fmt, int len, const uint8_t
 
 	if (len < opt->min_seed_len) return; // if the query is shorter than the seed length, no match
 	mem_collect_intv_batch(opt, fmt, len, seq, smemv, aux, tid);
-	smemv->pos_arr.n = 0;
+	// smemv->pos_arr.n = 0;
+	_destory_clear_vec(smemv->pos_arr);
 	for (i=0; i<smemv->mem.n; ++i) {
 		bwtintv_t *p = &smemv->mem.a[i];
 		int step, count; // seed length
@@ -1403,7 +1409,8 @@ void generate_chain(const mem_opt_t *opt, const FMTIndex *fmt, const bntseq_t *b
 	int i, j, b, e, l_rep;
 	int64_t l_pac = bns->l_pac;
 	kbtree_t(chn) * tree;
-	chain->n = 0;
+	// chain->n = 0;
+	_destory_clear_vec(*chain);
 
 	if (len < opt->min_seed_len) return; // if the query is shorter than the seed length, no match
 	tree = kb_init(chn, KB_DEFAULT_SIZE);

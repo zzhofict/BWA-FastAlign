@@ -30,7 +30,7 @@
 #include "utils.h"
 
 #ifndef PACKAGE_VERSION
-#define PACKAGE_VERSION "v1.0-0.7.17"
+#define PACKAGE_VERSION "FastAlign-v1.0-bwa-0.7.17"
 #endif
 
 int bwa_fa2pac(int argc, char *argv[]);

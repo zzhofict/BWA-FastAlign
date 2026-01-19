@@ -80,6 +80,25 @@ static inline unsigned long long __rdtsc(void)
 #endif
 #endif
 
+#define _destory_clear_vec(arr) \
+    do {                        \
+        free((arr).a);          \
+        (arr).a = 0;            \
+        (arr).m = (arr).n = 0;  \
+    } while (0)
+
+#define _destory_clear_kstring(arr) \
+    do {                        \
+        free((arr).s);          \
+        (arr).s = 0;            \
+        (arr).m = (arr).l = 0;  \
+    } while (0)
+
+#define _clear_vec(arr) \
+    do {                \
+        (arr).n = 0;    \
+    } while (0)
+
 #define log_file(fd, M, ...)            \
 	fprintf(fd, M "\n", ##__VA_ARGS__); \
 	fflush(fd)

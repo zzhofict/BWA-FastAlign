@@ -164,7 +164,8 @@ void bseq_read_pe_mt(int chunk_size, int *n_, void *ks1_, void *ks2_, int copy_c
 			*n_ = n; *seqs_ptr = seqs; *size_ = size; *m_ = n;
 			return;
 		}
-		m = (chunk_size + size / init_n_reads - 1) / (size / init_n_reads);
+		float bases_per_read = size * 1.0 / init_n_reads;
+        m = (chunk_size + bases_per_read * 100) / (bases_per_read); // allocate 100 more reads
 #else
 		m = 50000;
 #endif
