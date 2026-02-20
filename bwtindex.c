@@ -324,10 +324,10 @@ int bwa_index(int argc, char *argv[]) // the "index" command
 			break;
 		case 'p': prefix = strdup(optarg); break;
 		case '6': is_64 = 1; break;
-		case 't':
-			num_threads = atoi(optarg);
-			assert(num_threads > 0 && num_threads < 256);
-			break;
+		//case 't':
+		//	num_threads = atoi(optarg);
+		//	assert(num_threads > 0 && num_threads < 256);
+		//	break;
 		case 'b':
 			block_size = strtol(optarg, &str, 10);
 			if (*str == 'G' || *str == 'g') block_size *= 1024 * 1024 * 1024;
@@ -343,7 +343,7 @@ int bwa_index(int argc, char *argv[]) // the "index" command
 		fprintf(stderr, "Usage:   fastbwa index [options] <in.fasta>\n\n");
 		fprintf(stderr, "Options: -a STR    BWT construction algorithm: bwtsw, is or rb2 [auto]\n");
 		fprintf(stderr, "         -p STR    prefix of the index [same as fasta name]\n");
-		fprintf(stderr, "         -t INT    number of threads for ERT index building [%d]\n", num_threads);
+		// fprintf(stderr, "         -t INT    number of threads for index building [%d]\n", num_threads);
 		fprintf(stderr, "         -b INT    block size for the bwtsw algorithm (effective with -a bwtsw) [%d]\n", block_size);
 		fprintf(stderr, "         -6        index files named as <in.fasta>.64.* instead of <in.fasta>.* \n");
 		fprintf(stderr, "\n");

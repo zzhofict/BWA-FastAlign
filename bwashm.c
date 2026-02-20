@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "bwa.h"
 
-int bwa_shm_stage(bwaidx_t *idx, const char *hint, int useERT)
+int bwa_shm_stage(bwaidx_t *idx, const char *hint)
 {
 
 	const char *name;

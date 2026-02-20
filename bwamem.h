@@ -157,7 +157,6 @@ typedef struct {
 	const mem_opt_t *opt;
 	const bwt_t *bwt;
 	const FMTIndex *fmt;
-	const ERT *ert;
 	const bntseq_t *bns;
 	const uint8_t *pac;
 	const mem_pestat_t *pes;
@@ -171,13 +170,12 @@ typedef struct {
 	int64_t n_processed;
 	int64_t n;
 	int64_t n_reads;
-	int useERT;
 } mem_worker_t;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-	mem_worker_t *init_mem_worker(const mem_opt_t *opt, const FMTIndex *fmt, const ERT *ert, const bntseq_t *bns, const uint8_t *pac, int useERT);
+	mem_worker_t *init_mem_worker(const mem_opt_t *opt, const FMTIndex *fmt, const bntseq_t *bns, const uint8_t *pac);
 
 	smem_i *smem_itr_init(const bwt_t *bwt);
 	void smem_itr_destroy(smem_i *itr);

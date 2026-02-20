@@ -1264,11 +1264,11 @@ static void smem_aux_destroy(smem_aux_t *a)
 }
 
 // 
-mem_worker_t *init_mem_worker(const mem_opt_t *opt, const FMTIndex *fmt, const ERT *ert, const bntseq_t *bns, const uint8_t *pac, int useERT)
+mem_worker_t *init_mem_worker(const mem_opt_t *opt, const FMTIndex *fmt, const bntseq_t *bns, const uint8_t *pac)
 {
 	int i = opt->n_threads, j;
 	mem_worker_t *w = calloc(1, sizeof(mem_worker_t));
-	w->opt = opt; w->bns = bns; w->pac = pac; w->fmt = fmt; w->ert = ert; w->useERT = useERT;
+	w->opt = opt; w->bns = bns; w->pac = pac; w->fmt = fmt;
 	w->calc_isize = 0; w->n = 0; w->regs = 0;
 	w->aux = malloc(i * sizeof(smem_aux_t));
 	w->smem_arr = malloc(i * sizeof(smem_v *));

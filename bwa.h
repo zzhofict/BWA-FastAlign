@@ -49,20 +49,10 @@
 #define BWA_DBG_QNAME 0x1
 
 typedef struct {
-	uint64_t *kmer_offsets; // ert kmer
-	uint8_t *mlt_table;		// ert mlt
-	uint8_t *bref; // binary ref
-	uint64_t kmer_size;
-	uint64_t mlt_size;
-	uint64_t bref_size;
-} ERT;
-
-typedef struct {
 	bwt_t    *bwt; // FM-index
 	FMTIndex *fmt;// FMT-index
 	bntseq_t *bns; // information on the reference sequences
 	uint8_t  *pac; // the actual 2-bit encoded reference sequences with 'N' converted to a random base
-	ERT *ert;
 
 	int is_shm;
 	int64_t l_mem;

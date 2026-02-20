@@ -1,9 +1,9 @@
 thread=64
 
-n1=~/data/dataset/D2/n1.fq.gz
-n2=~/data/dataset/D2/n2.fq.gz
+n1=~/data/dataset/real/D1/n1.fq.gz
+n2=~/data/dataset/real/D1/n2.fq.gz
 
-reference=~/data/reference/fmt/human_g1k_v37_decoy.fasta
+reference=~/data1/fastalign-idx/human_g1k_v37_decoy.fasta
 
 out=./out.sam
 

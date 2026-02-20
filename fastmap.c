@@ -376,7 +376,6 @@ int main_mem(int argc, char *argv[])
 	void *ko = 0, *ko2 = 0;
 	mem_pestat_t pes[4];
 	ktp_aux_t aux;
-	int useERT = 0;
 
 	memset(&aux, 0, sizeof(ktp_aux_t));
 	memset(pes, 0, 4 * sizeof(mem_pestat_t));
@@ -634,7 +633,7 @@ int main_mem(int argc, char *argv[])
 	}
 
 	//fprintf(stderr, "%ld %ld %ld %ld %ld\n", aux.idx->fmt->L2[0], aux.idx->fmt->L2[1], aux.idx->fmt->L2[2], aux.idx->fmt->L2[3], aux.idx->fmt->L2[4]);
-	aux.w = init_mem_worker(opt, aux.idx->fmt, aux.idx->ert, aux.idx->bns, aux.idx->pac, useERT);
+	aux.w = init_mem_worker(opt, aux.idx->fmt, aux.idx->bns, aux.idx->pac);
 	aux.data = calloc(2, sizeof(ktp_data_t));
 
 	bwa_print_sam_hdr(aux.idx->bns, hdr_line);
