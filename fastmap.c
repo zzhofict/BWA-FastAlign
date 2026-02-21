@@ -499,7 +499,7 @@ int main_mem(int argc, char *argv[])
 
 	if (optind + 1 >= argc || optind + 3 < argc) {
 		fprintf(stderr, "\n");
-		fprintf(stderr, "Usage: fastbwa mem [options] <idxbase> <in1.fq> [in2.fq]\n\n");
+		fprintf(stderr, "Usage: fastalign mem [options] <idxbase> <in1.fq> [in2.fq]\n\n");
 		fprintf(stderr, "Algorithm options:\n\n");
 		fprintf(stderr, "       -t INT        number of threads [%d]\n", opt->n_threads);
 		fprintf(stderr, "       -b INT        batch size of reads to process at one time [%d]\n", opt->batch_size);
@@ -704,7 +704,7 @@ int main_fastmap(int argc, char *argv[])
 	}
 	if (optind + 1 >= argc) {
 		fprintf(stderr, "\n");
-		fprintf(stderr, "Usage:   fastbwa fastmap [options] <idxbase> <in.fq>\n\n");
+		fprintf(stderr, "Usage:   fastalign fastmap [options] <idxbase> <in.fq>\n\n");
 		fprintf(stderr, "Options: -l INT    min SMEM length to output [%d]\n", min_len);
 		fprintf(stderr, "         -w INT    max interval size to find coordiantes [%d]\n", min_iwidth);
 		fprintf(stderr, "         -i INT    min SMEM interval size [%d]\n", min_intv);

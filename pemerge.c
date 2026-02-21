@@ -238,7 +238,7 @@ int main_pemerge(int argc, char *argv[])
 
 	if (optind == argc) {
 		fprintf(stderr, "\n");
-		fprintf(stderr, "Usage:   fastbwa pemerge [-mu] <read1.fq> [read2.fq]\n\n");
+		fprintf(stderr, "Usage:   fastalign pemerge [-mu] <read1.fq> [read2.fq]\n\n");
 		fprintf(stderr, "Options: -m       output merged reads only\n");
 		fprintf(stderr, "         -u       output unmerged reads only\n");
 		fprintf(stderr, "         -t INT   number of threads [%d]\n", opt->n_threads);

@@ -63,7 +63,8 @@ static int usage()
 	fprintf(stderr, "Program: fast-bwa-mem (alignment via Burrows-Wheeler transformation)\n");
 	fprintf(stderr, "Version: %s\n", PACKAGE_VERSION);
 	fprintf(stderr, "Contact: Heng Li <hli@ds.dfci.harvard.edu> (for bwa)\n\n");
-	fprintf(stderr, "Usage:   fastbwa <command> [options]\n\n");
+    fprintf(stderr, "Contact: Zhonghai Zhang <zhangzhonghai@ict.ac.cn> (for fastalign)\n\n");
+    fprintf(stderr, "Usage:   fastalign <command> [options]\n\n");
 	fprintf(stderr, "Command: index         index sequences in the FASTA format\n");
 	fprintf(stderr, "         mem           BWA-MEM algorithm\n");
 	fprintf(stderr, "         fastmap       identify super-maximal exact matches\n");
@@ -124,11 +125,16 @@ int main(int argc, char *argv[])
 	else if (strcmp(argv[1], "shm") == 0) ret = main_shm(argc-1, argv+1);
 	else if (strcmp(argv[1], "pemerge") == 0) ret = main_pemerge(argc-1, argv+1);
 	else if (strcmp(argv[1], "maxk") == 0) ret = main_maxk(argc-1, argv+1);
-	else {
-		fprintf(stderr, "[main] unrecognized command '%s'\n", argv[1]);
+	else if (strcmp(argv[1], "help") == 0) {
+		usage();
+        ret = 0;
+    } else if (strcmp(argv[1], "version") == 0) {
+        ret = 0;
+    } else {
+        fprintf(stderr, "[main] unrecognized command '%s'\n", argv[1]);
 		return 1;
-	}
-	err_fflush(stdout);
+    }
+    err_fflush(stdout);
 	err_fclose(stdout);
 	if (ret == 0) {
 		fprintf(stderr, "[%s] Version: %s\n", __func__, PACKAGE_VERSION);

@@ -273,7 +273,7 @@ int bwa_aln(int argc, char *argv[])
 
 	if (optind + 2 > argc) {
 		fprintf(stderr, "\n");
-		fprintf(stderr, "Usage:   fastbwa aln [options] <prefix> <in.fq>\n\n");
+		fprintf(stderr, "Usage:   fastalign aln [options] <prefix> <in.fq>\n\n");
 		fprintf(stderr, "Options: -n NUM    max #diff (int) or missing prob under %.2f err rate (float) [%.2f]\n",
 				BWA_AVG_ERR, opt->fnr);
 		fprintf(stderr, "         -o INT    maximum number or fraction of gap opens [%d]\n", opt->max_gapo);

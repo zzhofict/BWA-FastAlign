@@ -593,7 +593,7 @@ int bwa_sai2sam_se(int argc, char *argv[])
 	}
 
 	if (optind + 3 > argc) {
-		fprintf(stderr, "Usage: fastbwa samse [-n max_occ] [-f out.sam] [-r RG_line] <prefix> <in.sai> <in.fq>\n");
+		fprintf(stderr, "Usage: fastalign samse [-n max_occ] [-f out.sam] [-r RG_line] <prefix> <in.sai> <in.fq>\n");
 		return 1;
 	}
 	if ((prefix = bwa_idx_infer_prefix(argv[optind])) == 0) {

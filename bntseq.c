@@ -342,7 +342,7 @@ int bwa_fa2pac(int argc, char *argv[])
 		}
 	}
 	if (argc == optind) {
-		fprintf(stderr, "Usage: fastbwa fa2pac [-f] <in.fasta> [<out.prefix>]\n");
+		fprintf(stderr, "Usage: fastalign fa2pac [-f] <in.fasta> [<out.prefix>]\n");
 		return 1;
 	}
 	fp = xzopen(argv[optind], "r");

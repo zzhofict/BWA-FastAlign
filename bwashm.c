@@ -372,7 +372,7 @@ int main_shm(int argc, char *argv[])
 		else if (c == 'd') to_drop = 1;
 	}
 	if (optind == argc && !to_list && !to_drop) {
-		fprintf(stderr, "\nUsage: fastbwa shm [-d|-l] [-f tmpFile] [idxbase]\n\n");
+		fprintf(stderr, "\nUsage: fastalign shm [-d|-l] [-f tmpFile] [idxbase]\n\n");
 		fprintf(stderr, "Options: -d       destroy all indices in shared memory\n");
 		fprintf(stderr, "         -l       list names of indices in shared memory\n");
 		return 1;

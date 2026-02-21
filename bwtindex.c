@@ -136,7 +136,7 @@ int bwa_pac2bwt(int argc, char *argv[]) // the "pac2bwt" command; IMPORTANT: bwt
 		}
 	}
 	if (optind + 2 > argc) {
-		fprintf(stderr, "Usage: fastbwa pac2bwt [-d] <in.pac> <out.bwt>\n");
+		fprintf(stderr, "Usage: fastalign pac2bwt [-d] <in.pac> <out.bwt>\n");
 		return 1;
 	}
 	bwt = bwt_pac2bwt(argv[optind], use_is);
@@ -156,7 +156,7 @@ int bwa_pac2bref(int argc, char *argv[])
 	char binary_ref_name[PATH_MAX];
 	if (optind + 1 > argc)
 	{
-		fprintf(stderr, "Usage: fastbwa pac2ref <index_prefix>\n");
+		fprintf(stderr, "Usage: fastalign pac2ref <index_prefix>\n");
 		return 1;
 	}
 	sprintf(pac_file_name, "%s.pac", argv[optind]);
@@ -226,7 +226,7 @@ int bwa_bwtupdate(int argc, char *argv[]) // the "bwtupdate" command
 {
 	bwt_t *bwt;
 	if (argc != 2) {
-		fprintf(stderr, "Usage: fastbwa bwtupdate <the.bwt>\n");
+		fprintf(stderr, "Usage: fastalign bwtupdate <the.bwt>\n");
 		return 1;
 	}
 	bwt = bwt_restore_bwt(argv[1]);
@@ -247,7 +247,7 @@ int bwa_bwt2sa(int argc, char *argv[]) // the "bwt2sa" command
 		}
 	}
 	if (optind + 2 > argc) {
-		fprintf(stderr, "Usage: fastbwa bwt2sa [-i %d] <in.bwt> <out.sa>\n", sa_intv);
+		fprintf(stderr, "Usage: fastalign bwt2sa [-i %d] <in.bwt> <out.sa>\n", sa_intv);
 		return 1;
 	}
 	bwt = bwt_restore_bwt(argv[optind]);
@@ -268,7 +268,7 @@ int bwa_bwt2bytesa(int argc, char *argv[]) // the "bwt2bytesa" command
 		}
 	}
 	if (optind + 2 > argc) {
-		fprintf(stderr, "Usage: fastbwa bwt2bytesa [-i %d] <in.bwt> <out.sa>\n", sa_intv);
+		fprintf(stderr, "Usage: fastalign bwt2bytesa [-i %d] <in.bwt> <out.sa>\n", sa_intv);
 		return 1;
 	}
 	bwt = bwt_restore_bwt(argv[optind]);
@@ -283,7 +283,7 @@ int bwa_bwt2fmt(int argc, char *argv[]) // create fmt index
 	bwt_t *bwt;
 	//char buf[1024];
 	if (optind + 1 > argc) {
-		fprintf(stderr, "Usage: fastbwa bwt2fmt <in.bwt> <out.fmt>\n");
+		fprintf(stderr, "Usage: fastalign bwt2fmt <in.bwt> <out.fmt>\n");
 		return 1;
 	}
 	bwt = bwt_restore_bwt(argv[optind]);
@@ -299,7 +299,7 @@ int bwa_build_kmer(int argc, char *argv[])
 	char buf[1024];
 	if (optind + 1 > argc)
 	{
-		fprintf(stderr, "Usage: fastbwa build_kmerhash <in.fmt> <out.kmerhash>\n");
+		fprintf(stderr, "Usage: fastalign build_kmerhash <in.fmt> <out.kmerhash>\n");
 		return 1;
 	}
 	FMTIndex *fmt = fmt_restore_fmt(argv[optind]);
@@ -311,7 +311,7 @@ int bwa_build_kmer(int argc, char *argv[])
 
 int bwa_index(int argc, char *argv[]) // the "index" command
 {
-	int num_threads = 1;
+	// int num_threads = 1;
 	int c, algo_type = BWTALGO_AUTO, is_64 = 0, block_size = 10000000;
 	char *prefix = 0, *str;
 	while ((c = getopt(argc, argv, "6a:p:b:")) >= 0) {
@@ -340,7 +340,7 @@ int bwa_index(int argc, char *argv[]) // the "index" command
 
 	if (optind + 1 > argc) {
 		fprintf(stderr, "\n");
-		fprintf(stderr, "Usage:   fastbwa index [options] <in.fasta>\n\n");
+		fprintf(stderr, "Usage:   fastalign index [options] <in.fasta>\n\n");
 		fprintf(stderr, "Options: -a STR    BWT construction algorithm: bwtsw, is or rb2 [auto]\n");
 		fprintf(stderr, "         -p STR    prefix of the index [same as fasta name]\n");
 		// fprintf(stderr, "         -t INT    number of threads for index building [%d]\n", num_threads);

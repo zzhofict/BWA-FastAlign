@@ -44,7 +44,7 @@ int bwa_bwtsw2(int argc, char *argv[])
 
 	if (optind + 2 > argc) {
 		fprintf(stderr, "\n");
-		fprintf(stderr, "Usage:   fastbwa bwasw [options] <target.prefix> <query.fa> [query2.fa]\n\n");
+		fprintf(stderr, "Usage:   fastalign bwasw [options] <target.prefix> <query.fa> [query2.fa]\n\n");
 		fprintf(stderr, "Options: -a INT   score for a match [%d]\n", opt->a);
 		fprintf(stderr, "         -b INT   mismatch penalty [%d]\n", opt->b);
 		fprintf(stderr, "         -q INT   gap open penalty [%d]\n", opt->q);
