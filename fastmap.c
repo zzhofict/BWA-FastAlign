@@ -33,7 +33,6 @@
 #include <ctype.h>
 #include <math.h>
 #include <pthread.h>
-#include <immintrin.h>
 #include "bwa.h"
 #include "bwamem.h"
 #include "kvec.h"

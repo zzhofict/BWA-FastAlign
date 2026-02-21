@@ -3,11 +3,13 @@
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
-#include <immintrin.h>
-#include <emmintrin.h>
 #include "utils.h"
 #include "debug.h"
 #include "profiling.h"
+
+#if __AVX2__
+#include <immintrin.h>
+#include <emmintrin.h>
 
 #define ELIMINATE_DIFF_1
 // #define ELIMINATE_DIFF_3
@@ -824,3 +826,5 @@ int ksw_extend2_origin(int qlen, // query length  query
 	if (_max_off) *_max_off = max_off;
 	return max;
 }
+
+#endif

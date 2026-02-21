@@ -30,7 +30,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <zlib.h>
-#include <immintrin.h>
 #include "profiling.h"
 
 #undef MAX

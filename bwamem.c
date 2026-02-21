@@ -30,7 +30,6 @@
 #include <assert.h>
 #include <limits.h>
 #include <math.h>
-#include <immintrin.h>
 #ifdef HAVE_PTHREAD
 #include <pthread.h>
 #endif
@@ -761,7 +760,7 @@ void mem_chain2aln(const mem_opt_t *opt, const bntseq_t *bns, const uint8_t *pac
 		if (s->qbeg) { // left extension
 			int qle, tle, gtle, gscore;
 			tmp = s->rbeg - rmax[0];
-#ifndef USE_AVX2
+#if !__AVX2__
 			uint8_t *rs, *qs;
 			qs = malloc(s->qbeg);
 			for (i = 0; i < s->qbeg; ++i) qs[i] = query[s->qbeg - 1 - i];
@@ -777,10 +776,10 @@ void mem_chain2aln(const mem_opt_t *opt, const bntseq_t *bns, const uint8_t *pac
 					printf("*** Left query: "); for (j = 0; j < s->qbeg; ++j) putchar("ACGTN"[(int)query[s->qbeg - 1 - j]]); putchar('\n');
 				}
 				PROF_START(bsw);
-#ifndef USE_AVX2
-				a->score = ksw_extend2(s->qbeg, qs, tmp, rs, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, aw[0], opt->pen_clip5, opt->zdrop, s->len * opt->a, &qle, &tle, &gtle, &gscore, &max_off[0], aux->sw_buf);
+#if __AVX2__
+				a->score = ksw_extend2_avx2(s->qbeg, query, tmp, rseq, 1, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, opt->a, opt->b, aw[0], opt->pen_clip5, opt->zdrop, s->len * opt->a, &qle, &tle, &gtle, &gscore, &max_off[0], aux->sw_buf);	
 #else
-				a->score = ksw_extend2_avx2(s->qbeg, query, tmp, rseq, 1, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, opt->a, opt->b, aw[0], opt->pen_clip5, opt->zdrop, s->len * opt->a, &qle, &tle, &gtle, &gscore, &max_off[0], aux->sw_buf);
+				a->score = ksw_extend2(s->qbeg, qs, tmp, rs, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, aw[0], opt->pen_clip5, opt->zdrop, s->len * opt->a, &qle, &tle, &gtle, &gscore, &max_off[0], aux->sw_buf);
 #endif
 				PROF_END(tprof[T_BSW][tid], bsw);
 				if (bwa_verbose >= 4) { printf("*** Left extension: prev_score=%d; score=%d; bandwidth=%d; max_off_diagonal_dist=%d\n", prev, a->score, aw[0], max_off[0]); fflush(stdout); }
@@ -794,7 +793,7 @@ void mem_chain2aln(const mem_opt_t *opt, const bntseq_t *bns, const uint8_t *pac
 				a->qb = 0, a->rb = s->rbeg - gtle;
 				a->truesc = gscore;
 			}
-#ifndef USE_AVX2
+#if !__AVX2__
 			free(qs); free(rs);
 #endif
 		} else a->score = a->truesc = s->len * opt->a, a->qb = 0, a->rb = s->rbeg;
@@ -813,10 +812,10 @@ void mem_chain2aln(const mem_opt_t *opt, const bntseq_t *bns, const uint8_t *pac
 					printf("*** Right query: "); for (j = 0; j < l_query - qe; ++j) putchar("ACGTN"[(int)query[qe+j]]); putchar('\n');
 				}
 				PROF_START(bsw);
-#ifndef USE_AVX2
-				a->score = ksw_extend2(l_query - qe, query + qe, rmax[1] - rmax[0] - re, rseq + re, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, aw[1], opt->pen_clip3, opt->zdrop, sc0, &qle, &tle, &gtle, &gscore, &max_off[1], aux->sw_buf);
+#if __AVX2__
+                a->score = ksw_extend2_avx2(l_query - qe, query + qe, rmax[1] - rmax[0] - re, rseq + re, 0, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, opt->a, opt->b, aw[1], opt->pen_clip3, opt->zdrop, sc0, &qle, &tle, &gtle, &gscore, &max_off[1], aux->sw_buf);
 #else
-				a->score = ksw_extend2_avx2(l_query - qe, query + qe, rmax[1] - rmax[0] - re, rseq + re, 0, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, opt->a, opt->b, aw[1], opt->pen_clip3, opt->zdrop, sc0, &qle, &tle, &gtle, &gscore, &max_off[1], aux->sw_buf);
+                a->score = ksw_extend2(l_query - qe, query + qe, rmax[1] - rmax[0] - re, rseq + re, 5, opt->mat, opt->o_del, opt->e_del, opt->o_ins, opt->e_ins, aw[1], opt->pen_clip3, opt->zdrop, sc0, &qle, &tle, &gtle, &gscore, &max_off[1], aux->sw_buf);
 #endif
 				PROF_END(tprof[T_BSW][tid], bsw);
 				if (bwa_verbose >= 4) { printf("*** Right extension: prev_score=%d; score=%d; bandwidth=%d; max_off_diagonal_dist=%d\n", prev, a->score, aw[1], max_off[1]); fflush(stdout); }

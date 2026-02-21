@@ -2,10 +2,11 @@
 #include <stdint.h>
 #include <assert.h>
 #include <stdio.h>
-#include <immintrin.h>
-#include <emmintrin.h>
 #include "utils.h"
 
+#if __AVX2__
+#include <immintrin.h>
+#include <emmintrin.h>
 #define ELIMINATE_DIFF_1
 
 #define SIMD_WIDTH 32
@@ -428,3 +429,5 @@ int ksw_extend2_avx2_u8(int qlen, // query length  query
     if (_max_off) *_max_off = max_off;
 	return max;
 }
+
+#endif
