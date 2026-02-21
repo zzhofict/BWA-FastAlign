@@ -1,5 +1,5 @@
 CC=			gcc
-CFLAGS=		-g -Wall -Wno-unused-function -mavx2 -O2
+CFLAGS=		-g -Wall -Wno-unused-function -mavx2 -O3
 WRAP_MALLOC=-DUSE_MALLOC_WRAPPERS
 
 SHOW_PERF= #-DSHOW_PERF
@@ -17,7 +17,7 @@ AOBJS=		bwashm.o bwase.o bwaseqio.o bwtgap.o bwtaln.o bamlite.o \
 			bwtsw2_chain.o fastmap.o bwtsw2_pair.o profiling.o \
 			fmt_idx.o ksw_extend2_avx2.o ksw_extend2_avx2_u8.o \
 			debug.o
-PROG=		fastalign
+PROG=		bwa-fastalign
 INCLUDES=	
 LIBS=		-lm -lz -lpthread -ldl
 SUBDIRS=	.

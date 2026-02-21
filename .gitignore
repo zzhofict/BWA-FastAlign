@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 fastalign
+bwa-fastalign
 
 # Object files
 *.o

@@ -7,7 +7,7 @@ reference=~/data1/fastalign-idx/human_g1k_v37_decoy.fasta
 
 out=./out.sam
 
-time ./fastalign mem -t $thread -M -R @RG\\tID:normal\\tSM:normal\\tPL:illumina\\tLB:normal\\tPG:bwa \
+time ./bwa-fastalign mem -t $thread -M -R @RG\\tID:normal\\tSM:normal\\tPL:illumina\\tLB:normal\\tPG:bwa \
     $reference \
     $n1 \
     $n2 \
