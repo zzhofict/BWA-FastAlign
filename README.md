@@ -16,12 +16,12 @@ It is designed as a drop-in replacement for the de facto standard **BWA-MEM**, o
 
 BWA-FastAlign revitalizes the traditional alignment pipeline with two core algorithmic contributions:
 
-1.  **Multi-Stage Seeding (Hybrid Index)**
+*   **Multi-Stage Seeding (Hybrid Index)**
     *   Combines **Kmer-Index**, **FMT-Index** (Enhanced FM-Index with prefetching), and **Direct-Index**.
     *   Dynamically switches strategies based on seed length and match density.
     *   Achieves an **18.92× improvement in memory efficiency** (bases processed per GB per second).
 
-2.  **Intra-Query Parallel Seed-Extension**
+*   **Intra-Query Parallel Seed-Extension**
     *   Unlike BWA-MEM2 (which uses inter-query parallelism and suffers from load imbalance), BWA-FastAlign parallelizes the Smith-Waterman alignment *within* a single query.
     *   Includes **Dynamic Pruning** to skip zero-alignment scores.
     *   Implements a **Sliding Window** mechanism to reduce costly memory gather operations.
@@ -29,13 +29,21 @@ BWA-FastAlign revitalizes the traditional alignment pipeline with two core algor
 
 ## 📥 Installation
 
-### Prerequisites
+### Option 1: Install via Bioconda (Recommended)
+BWA-FastAlign is available on Bioconda. This is the easiest way to install as it handles dependencies automatically.
+```bash
+conda install -c bioconda bwa-fastalign
+```
+
+### Option 2: Build from Source
+
+#### Prerequisites
 *   Linux operating system (tested on Ubuntu 22.04).
 *   GCC compiler (version 11.4 or higher recommended).
 *   CPU supporting **AVX2** instructions (most modern Intel/AMD CPUs).
 *   zlib development files.
 
-### Compilation
+#### Compilation
 ```bash
 git clone https://github.com/your-username/BWA-FastAlign.git
 cd BWA-FastAlign
@@ -45,7 +53,7 @@ make
 ## 📖 Usage
 BWA-FastAlign follows the same command-line interface as BWA-MEM.
 
-0.  **Download Datasets.** We download E.coli reference genome and sequencing reads.
+*   **Download Datasets.** We download E.coli reference genome and sequencing reads.
 ```bash
 # Download reference genome
 wget http://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2_ASM584v2/GCA_000005845.2_ASM584v2_genomic.fna.gz
@@ -57,13 +65,13 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz -O reads_2.fq.gz
 ```
 
-1.  **Index the Reference.** Before alignment, you must index your reference genome.
+*   **Index the Reference.** Before alignment, you must index your reference genome.
 ```bash
 # This will generate the hybrid index files
 ./fastalign index ref.fa
 ```
 
-2.  **Align Reads (Mem).** Map single-end or paired-end reads to the reference.
+*   **Align Reads (Mem).** Map single-end or paired-end reads to the reference.
 ```bash
 # Single-end alignment
 ./fastalign mem ref.fasta reads_1.fq.gz > aln.sam
@@ -75,7 +83,7 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq
 ./fastalign mem -t 64 ref.fasta reads_1.fq.gz reads_2.fq.gz > aln.sam
 ```
 
-3.  **Options.** BWA-FastAlign supports the standard BWA-MEM options. Run ./fastalign mem to see the full list.
+*   **Options.** BWA-FastAlign supports the standard BWA-MEM options. Run ./fastalign mem to see the full list.
 
 ## 📜 Citation
 If you find BWA-FastAlign is useful in your research, please cite our paper:
