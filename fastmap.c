@@ -130,8 +130,8 @@ static inline void *calc_data(ktp_aux_t *aux, ktp_data_t *data)
 		int n_sep[2];
 		mem_opt_t tmp_opt = *opt;
 		bseq_classify(data->n_seqs, data->seqs, n_sep, sep);
-		ss[0] = calloc(0, n_sep[0] * sizeof(seq_sam_t));
-		ss[1] = calloc(0, n_sep[1] * sizeof(seq_sam_t));
+		ss[0] = calloc(n_sep[0], sizeof(seq_sam_t));
+		ss[1] = calloc(n_sep[1], sizeof(seq_sam_t));
 		if (bwa_verbose >= 3)
 			fprintf(stderr, "[M::%s] %d single-end sequences; %d paired-end sequences\n", __func__, n_sep[0], n_sep[1]);
 		if (n_sep[0]) {
